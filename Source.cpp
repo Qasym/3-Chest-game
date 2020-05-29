@@ -2,6 +2,7 @@
 #include<vector>
 #include<random>
 #include<chrono>
+#include<stdlib.h>
 
 struct Chest {
 
@@ -26,7 +27,7 @@ struct Chest {
 		return picked;
 	}
 
-	bool check() { 
+	bool check() {
 		//checks whether booleans are equal;
 		//if it's true, we either know that chest is picked and contains treasure
 		//or we know that chest is not picked and there is no treasure;
@@ -111,16 +112,19 @@ void notSwappingChests(int& hits, int simulations) { //this function is the same
 
 		vec.clear();//clear the chest;
 	}
-} 
+}
 void tryYourself() {
 	int user_pick;
 	do {
 		std::cout << "Which chest do you want to choose? 1, 2 or 3?\n";
 		std::cin >> user_pick;
-		if (user_pick != 1 || user_pick != 2 || user_pick != 3) {
+		if (user_pick == 1 || user_pick == 2 || user_pick == 3) {
+			break;
+		}
+		else {
 			std::cout << "Wrong type of input!\n";
 		}
-	} while (user_pick != 1 || user_pick != 2 || user_pick != 3);
+	} while (true);
 	user_pick--; //since we use 0-indexed system;
 
 	std::vector<Chest> vec;
@@ -145,15 +149,20 @@ void tryYourself() {
 
 	int answer;
 	do {
-		std::cout << "Do you want to change your pick? Yes-1, No-0\n";
-		cin >> answer;
-		if (answer != 1 || answer != 0) {
+		std::cout << "Do you want to change your pick? Yes-1, No-2\n";
+		std::cin >> answer;
+		if (answer == 1 || answer == 2) {
+			break;
+		}
+		else {
 			std::cout << "Wrong type of input!\n";
 		}
-	} while (answer != 1 || answer != 0);
+	} while (true);
+	answer--;
 
-	if (answer) {
+	if (!answer) {
 		swapPicks(vec[0], vec[1]);
+		std::cout << "Choice changed!\n";
 	}
 
 	if (vec[0].check()) {
@@ -161,6 +170,23 @@ void tryYourself() {
 	}
 	else {
 		std::cout << "Unfortunately, you lost.\n";
+	}
+
+	std::cout << "Do you want to play again?\n";
+	do {
+		std::cout << "Yes-1, No-2\n";
+		std::cin >> user_pick;
+		if (user_pick == 1 || user_pick == 2) {
+			break;
+		}
+		else {
+			std::cout << "Wrong type of input!\n";
+		}
+	} while (true);
+	user_pick--;//since it is simple to use booleans;
+
+	if (!user_pick) {
+		tryYourself();
 	}
 
 }
@@ -175,25 +201,33 @@ void simulator() {
 	swappingChests(hits1, simulations);
 	notSwappingChests(hits2, simulations);
 
-	std::cout << "For a given number of simulations, you win in " << hits1 << " cases, if you swap.\n";
-	std::cout << "For a given number of simulations, you win in " << hits2 << " cases, if you do not swap.\n";
+	std::cout << "For a given number of simulations, you win in " << hits1 << " cases, if you change your choice.\n";
+	std::cout << "For a given number of simulations, you win in " << hits2 << " cases, if you do not change your choice.\n";
 }
 
 int main() {
+	std::cout << "Hello! Welcome to my 3 chests game!\n";
+
 	int answer;
 	do {
-		std::cout << "Simulate-0, Try yourself-1\n";
+		std::cout << "Simulate-1, Try yourself-2\n";
 		std::cin >> answer;
-		if (answer != 1 || answer != 0) {
+		if (answer == 1 || answer == 2) {
+			break;
+		}
+		else {
 			std::cout << "Wrong type of input!\n";
 		}
-	} while (answer != 1 || answer != 0);
+	} while (true);
+	answer--;
 
-	if (answer) {
-		tryYourself();
+	std::system("CLS");//to clear out the console;
+
+	if (!answer) {
+		simulator();
 	}
 	else {
-		simulator();
+		tryYourself();
 	}
 	return 1;
 }
