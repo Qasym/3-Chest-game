@@ -9,7 +9,7 @@ the treasure from 2 chests that you did not choose, and will give a chance to yo
 
 The question is, will you change your choice?
 
-This simple project allows you to check how many times will you win if you change your choice
+This simple project allows you to check how many times you will win if you change your choice
 and how many times if you won't. 
 
 It also allows you to play the game yourself, and choose whether to change your choice or not.
