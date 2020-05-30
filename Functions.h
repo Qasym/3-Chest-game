@@ -197,6 +197,7 @@ void tryYourself() {
 	}
 
 }
+
 void simulator() {
 	int simulations;
 	int hits1 = 0;
@@ -210,4 +211,23 @@ void simulator() {
 
 	std::cout << "For a given number of simulations, you win in " << hits1 << " cases, if you change your choice.\n";
 	std::cout << "For a given number of simulations, you win in " << hits2 << " cases, if you do not change your choice.\n";
+
+	int answer;
+	std::cout << "Do you want another simulation?\n";
+	do {
+		std::cout << "Yes-1, No-2\n";
+		std::cin >> answer;
+		if (answer == 1 || answer == 2) {
+			break;
+		}
+		else {
+			std::cout << "Wrong type of input!\n";
+		}
+	} while (true);
+	answer--;//since it is simple to use booleans;
+
+	if (!answer) {
+		simulator();
+	}
+
 }
